@@ -5,7 +5,15 @@
         "root": "data/"
     },
     "dataloader": {
-        "train_batch_size": 32,
-        "test_batch_size": 32
+        "train_batch_size": 1024,
+        "test_batch_size": 1024
+    },
+    "train": {
+        "epochs": 10,
+        "learning_rate": 1e-3
+    },
+    "show": {
+        "acc_img": "log/acc_img.jpg",
+        "loss_img": "log/loss_img.jpg"
     }
 }
