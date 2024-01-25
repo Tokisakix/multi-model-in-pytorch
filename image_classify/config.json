@@ -1,0 +1,11 @@
+{
+    "cuda": true,
+    "data": {
+        "download": true,
+        "root": "data/"
+    },
+    "dataloader": {
+        "train_batch_size": 32,
+        "test_batch_size": 32
+    }
+}
