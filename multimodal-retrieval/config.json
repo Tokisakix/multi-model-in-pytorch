@@ -1,6 +1,0 @@
-{
-    "cuda": true,
-    "webui": {
-        "port": 8000
-    }
-}
