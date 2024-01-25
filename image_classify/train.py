@@ -3,6 +3,7 @@ from torch import nn, optim
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from time import perf_counter
+import os
 
 from load_config import load_config
 from data import get_dataset
@@ -69,15 +70,20 @@ def train(model, optimizer, ceriterion, train_dataloader, test_dataloader):
     return  epoch_list, loss_list, acc_list
 
 def draw(epoch_list, loss_list, acc_list):
+    if not os.path.isdir("log"):
+        os.mkdir("log")
+
     plt.plot(epoch_list, loss_list, label="Loss")
     plt.title("Loss Img")
     plt.legend()
     plt.savefig(LOSS_IIMG)
+    plt.close()
 
     plt.plot(epoch_list, acc_list, label="Acc")
     plt.title("Acc Img")
     plt.legend()
     plt.savefig(ACC_IMG)
+    plt.close()
     return
 
 
