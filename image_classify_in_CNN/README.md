@@ -4,6 +4,10 @@
 
 A simple convolutional neural network is used to classify images
 
+![img](asset/loss_img.jpg)
+
+![img](asset/acc_img.jpg)
+
 # Requirement
 
 ```

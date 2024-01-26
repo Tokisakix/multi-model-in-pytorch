@@ -4,6 +4,10 @@
 
 使用简易的卷积神经网络，对图片做分类
 
+![img](asset/loss_img.jpg)
+
+![img](asset/acc_img.jpg)
+
 # 环境依赖
 
 ```
