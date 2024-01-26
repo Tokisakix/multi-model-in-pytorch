@@ -4,6 +4,10 @@
 
 A simple Vision Transformer model, is used to classify images
 
+![img](asset/loss_img.jpg)
+
+![img](asset/acc_img.jpg)
+
 # Requirement
 
 ```
@@ -17,7 +21,7 @@ tqdm
 
 ```
 cd ~/image_classify
-python train.py
+python run.py
 ```
 
 The sample code then automatically downloads the data set according to the global Settings and starts training. By default, the data set is downloaded in the <code>data/</code> directory, and the logs are saved in the <code>log/</code> directory

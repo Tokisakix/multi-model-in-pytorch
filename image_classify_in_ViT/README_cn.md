@@ -4,6 +4,10 @@
 
 使用简易的视觉 Transformer 模型，对图片做分类
 
+![img](asset/loss_img.jpg)
+
+![img](asset/acc_img.jpg)
+
 # 环境依赖
 
 ```
@@ -17,7 +21,7 @@ tqdm
 
 ```
 cd ~/image_classify
-python train.py
+python run.py
 ```
 
 然后示例代码会根据全局设置自动下载数据集并开始训练，默认下数据集下载于 <code>data/</code> 目录，日志保存在 <code>log/</code> 目录
