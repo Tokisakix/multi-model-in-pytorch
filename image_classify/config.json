@@ -1,5 +1,9 @@
 {
     "cuda": true,
+    "log": {
+        "root": "log/",
+        "save_num": 4
+    },
     "data": {
         "download": true,
         "root": "data/"
@@ -13,7 +17,7 @@
         "learning_rate": 1e-3
     },
     "show": {
-        "acc_img": "log/acc_img.jpg",
-        "loss_img": "log/loss_img.jpg"
+        "acc_img": "acc_img.jpg",
+        "loss_img": "loss_img.jpg"
     }
 }
