@@ -1,0 +1,23 @@
+{
+    "cuda": true,
+    "log": {
+        "root": "log/",
+        "save_num": 4
+    },
+    "data": {
+        "download": true,
+        "root": "data/"
+    },
+    "dataloader": {
+        "train_batch_size": 1024,
+        "test_batch_size": 1024
+    },
+    "train": {
+        "epochs": 10,
+        "learning_rate": 1e-3
+    },
+    "show": {
+        "acc_img": "acc_img.jpg",
+        "loss_img": "loss_img.jpg"
+    }
+}

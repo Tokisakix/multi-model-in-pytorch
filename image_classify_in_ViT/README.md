@@ -1,8 +1,8 @@
-# Image Classify Model
+# Image Classify in CNN
 
 [中文](README_cn.md) | 英文
 
-A simple convolutional neural network is used to classify images
+A simple Vision Transformer model, is used to classify images
 
 # Requirement
 
