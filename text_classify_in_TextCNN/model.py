@@ -5,9 +5,9 @@ import torch.nn.functional as F
 from load_config import load_config
 
 class Model(nn.Module):
-    def __init__(self):
+    def __init__(self, vocab_size):
         super().__init__()
-        self.emb   = nn.Embedding(num_embeddings=176694, embedding_dim=300)
+        self.emb   = nn.Embedding(num_embeddings=vocab_size, embedding_dim=300)
         self.conv1 = nn.Conv1d(in_channels=128, out_channels=128, kernel_size=3, stride=3)
         self.conv2 = nn.Conv1d(in_channels=128, out_channels=128, kernel_size=7, stride=7)
         self.conv3 = nn.Conv1d(in_channels=128, out_channels=128, kernel_size=11, stride=11)
