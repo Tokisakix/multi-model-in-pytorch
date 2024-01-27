@@ -111,7 +111,7 @@ if __name__ == "__main__":
     test_dataloader  = get_dataloader(CONFIG, test_dataset,  mod="test")
     logger.info("Load data.")
 
-    model = Model(vocab_size)
+    model = Model(300_000)
     model = model.cuda() if CUDA else model
     logger.info("Build model.")
 

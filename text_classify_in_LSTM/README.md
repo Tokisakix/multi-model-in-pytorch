@@ -4,6 +4,8 @@
 
 A simple LSTM model, is used to classify text
 
+![img](asset/LSTM.png)
+
 # Requirement
 
 ```

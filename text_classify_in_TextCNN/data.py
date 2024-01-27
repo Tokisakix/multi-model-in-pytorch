@@ -9,7 +9,7 @@ def get_raw_data(CONFIG, mod):
 
     raw_data_set = datasets.IMDB(DATA_CONFIG["root"], split=mod)
     raw_text_set  = [[word for word in item[1].split(" ")] for item in iter(raw_data_set)]
-    raw_label_set = [item[0] for item in iter(raw_data_set)]
+    raw_label_set = [item[0] - 1 for item in iter(raw_data_set)]
 
     return raw_text_set, raw_label_set
 

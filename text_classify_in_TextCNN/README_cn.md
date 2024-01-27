@@ -4,6 +4,8 @@
 
 使用简易的 TextCNN 模型，对文本做分类
 
+![img](asset/TextCNN.png)
+
 # 环境依赖
 
 ```

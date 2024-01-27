@@ -4,9 +4,11 @@
 
 A simple Vision Transformer model, is used to classify images
 
-![img](asset/loss_img.jpg)
+![img](asset/ViT.png)
 
-![img](asset/acc_img.jpg)
+<center class = "half">
+<img src = "asset/loss_img.jpg"  width = "50%" align = left><img src = "asset/acc_img.jpg"  width = "50%" align = right>
+</center>
 
 # Requirement
 

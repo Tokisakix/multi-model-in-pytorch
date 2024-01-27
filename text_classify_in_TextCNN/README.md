@@ -4,6 +4,8 @@
 
 A simple TextCNN model, is used to classify text
 
+![img](asset/TextCNN.png)
+
 # Requirement
 
 ```

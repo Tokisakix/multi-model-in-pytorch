@@ -4,6 +4,8 @@
 
 使用简易的 LSTM 模型，对文本做分类
 
+![img](asset/LSTM.png)
+
 # 环境依赖
 
 ```

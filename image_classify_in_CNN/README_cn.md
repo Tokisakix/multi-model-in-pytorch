@@ -4,9 +4,11 @@
 
 使用简易的卷积神经网络，对图片做分类
 
-![img](asset/loss_img.jpg)
+![img](asset/CNN.png)
 
-![img](asset/acc_img.jpg)
+<center class = "half">
+<img src = "asset/loss_img.jpg"  width = "50%" align = left><img src = "asset/acc_img.jpg"  width = "50%" align = right>
+</center>
 
 # 环境依赖
 
