@@ -6,3 +6,4 @@
 
 1. [图片分类-CNN实现](image_classify_in_CNN/README_cn.md)
 2. [图片分类-ViT实现](image_classify_in_ViT/README_cn.md)
+3. [文本分类-TextCNN实现](text_classify_in_TextCNN/README_cn.md)
