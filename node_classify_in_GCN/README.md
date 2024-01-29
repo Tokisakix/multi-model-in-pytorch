@@ -1,17 +1,21 @@
-# Text Classify in TextCNN
+# Node Classify in GCN
 
 [中文](README_cn.md) | 英文
 
-A simple TextCNN model, is used to classify text
+A simple GCN model, is used to classify node
 
-![img](asset/TextCNN.png)
+![img](asset/GCN.png)
+
+<center class = "half">
+    <img src = "asset/loss_img.jpg"  width = "50%" align = left>
+    <img src = "asset/acc_img.jpg"  width = "50%" align = right>
+</center>
 
 # Requirement
 
 ```
 torch
-torchtext
-matplotlib
+torch_geometric
 tqdm
 ```
 

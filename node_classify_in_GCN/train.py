@@ -6,7 +6,7 @@ from time import perf_counter
 import os
 
 from load_config import load_config
-from data import get_raw_data, get_data, get_dataset
+from data import get_dataset
 from dataloader import get_dataloader
 from model import Model
 from logger import Logger
@@ -29,11 +29,12 @@ def test(model, test_dataloader):
     cnt = 0
     tot = 0
 
-    for inputs, labels in tqdm(test_dataloader):
+    for inputs, edges, labels in tqdm(test_dataloader):
         inputs = inputs.cuda() if CUDA else inputs
+        edges  = edges.cuda()  if CUDA else edges
         labels = labels.cuda() if CUDA else labels
 
-        outputs = model(inputs)
+        outputs = model(inputs, edges)
         predict = torch.max(outputs, 1)[1] == labels
         predict = predict.sum().cpu().item()
 
@@ -51,11 +52,12 @@ def train(model, optimizer, ceriterion, train_dataloader, test_dataloader, logge
     acc_list   = []
 
     for epoch in range(1, EPOCHS + 1):
-        for inputs, labels in tqdm(train_dataloader):
+        for inputs, edges, labels in tqdm(train_dataloader):
             inputs = inputs.cuda() if CUDA else inputs
+            edges  = edges.cuda()  if CUDA else edges
             labels = labels.cuda() if CUDA else labels
 
-            outputs = model(inputs)
+            outputs = model(inputs, edges)
             optimizer.zero_grad()
             loss = ceriterion(outputs, labels)
             loss.backward()
@@ -98,25 +100,18 @@ def draw(epoch_list, loss_list, acc_list):
 if __name__ == "__main__":
     logger.info("Logger init.")
 
-    raw_train_text_set, raw_train_label_set = get_raw_data(CONFIG, "train")
-    raw_test_text_set,  raw_test_label_set  = get_raw_data(CONFIG, "test")
+    dataset = get_dataset(CONFIG)
 
-    train_text_set, train_label_set, word2idx, vocab_size = get_data(raw_train_text_set, raw_train_label_set)
-    test_text_set,  test_label_set, _, _  = get_data(raw_test_text_set,  raw_test_label_set, word2idx)
-
-    train_dataset = get_dataset(train_text_set, train_label_set)
-    test_dataset  = get_dataset(test_text_set,  test_label_set)
-
-    train_dataloader = get_dataloader(CONFIG, train_dataset, mod="train")
-    test_dataloader  = get_dataloader(CONFIG, test_dataset,  mod="test")
+    inputs, edges, labels = get_dataloader(CONFIG, dataset)
+    dataloader = [(inputs, edges, labels)]
     logger.info("Load data.")
 
-    model = Model(300_000)
+    model = Model()
     model = model.cuda() if CUDA else model
     logger.info("Build model.")
 
     optimizer  = optim.Adam(model.parameters(), lr=LEARNING_RATE)
     ceriterion = nn.CrossEntropyLoss()
 
-    epoch_list, loss_list, acc_list = train(model, optimizer, ceriterion, train_dataloader, test_dataloader, logger)
+    epoch_list, loss_list, acc_list = train(model, optimizer, ceriterion, dataloader, dataloader, logger)
     draw(epoch_list, loss_list, acc_list)

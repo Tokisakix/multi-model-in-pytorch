@@ -1,17 +1,21 @@
-# 文本分类-TextCNN
+# 节点分类-GCN
 
 中文 | [英文](README.md)
 
-使用简易的 TextCNN 模型，对文本做分类
+使用简易的 GCN 模型，对图节点做分类
 
-![img](asset/TextCNN.png)
+![img](asset/GCN.png)
+
+<center class = "half">
+    <img src = "asset/loss_img.jpg"  width = "50%" align = left>
+    <img src = "asset/acc_img.jpg"  width = "50%" align = right>
+</center>
 
 # 环境依赖
 
 ```
 torch
-torchtext
-matplotlib
+torch_geometric
 tqdm
 ```
 
