@@ -7,15 +7,16 @@ from load_config import load_config
 class Model(torch.nn.Module):
     def __init__(self):
         super().__init__()
-        self.gcn1 = torch_geometric.nn.GCNConv(in_channels=8710, out_channels=128)
-        self.gcn2 = torch_geometric.nn.GCNConv(in_channels=128, out_channels=70)
+        self.gcn1 = torch_geometric.nn.GCNConv(in_channels=8710, out_channels=1024)
+        self.gcn2 = torch_geometric.nn.GCNConv(in_channels=1024, out_channels=70)
         return
     
     def forward(self, inputs, edges):
         outputs = self.gcn1(inputs, edges)
         outputs = F.relu(outputs)
+        outputs = F.dropout(outputs, p=0.5)
         outputs = self.gcn2(outputs, edges)
-        outputs = F.softmax(outputs, dim=-1)
+        outputs = F.log_softmax(outputs, dim=-1)
         return outputs
 
 
