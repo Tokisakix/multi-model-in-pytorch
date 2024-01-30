@@ -11,3 +11,4 @@
 3. [文本分类-TextCNN 实现](text_classify_in_TextCNN/README_cn.md)
 4. [文本分类-LSTM 实现](text_classify_in_LSTM/README_cn.md)
 5. [节点分类-GCN 实现](node_classify_in_GCN/README_cn.md)
+6. [节点分类-GAT 实现](node_classify_in_GAT/README_cn.md)
