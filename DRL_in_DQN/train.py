@@ -1,3 +1,4 @@
+import os
 import gym
 import matplotlib.pyplot as plt
 from tqdm import tqdm
@@ -6,6 +7,7 @@ from load_config import load_config
 from ReplayBuffer import ReplayBuffer
 from model import Model
 from framework import DQN
+from logger import Logger
 
 CONFIG        = load_config()
 CUDA          = CONFIG["cuda"]
@@ -15,6 +17,10 @@ BUFFER_CONFIG = CONFIG["buffer"]
 AGENT_CONFIG  = CONFIG["agent"]
 TRAIN_CONFIG  = CONFIG["train"]
 SHOW_CONFIG   = CONFIG["show"]
+LOG_ROOT      = LOG_CONFIG["root"]
+SAVE_NUM      = LOG_CONFIG["save_num"]
+logger        = Logger(LOG_ROOT, SAVE_NUM)
+
 BUFFER_SIZE   = BUFFER_CONFIG["buffer_size"]
 BATCH_SIZE    = BUFFER_CONFIG["batch_size"]
 MINIMAL_SIZE  = BUFFER_CONFIG["minimal_size"]
@@ -23,7 +29,7 @@ GAMMA         = AGENT_CONFIG["gamma"]
 EPSILON       = AGENT_CONFIG["epsilon"]
 TARGET_UPDATE = AGENT_CONFIG["target_update"]
 EPOCHS        = TRAIN_CONFIG["epochs"]
-REWARD_IMG    = SHOW_CONFIG["reward_img"]
+REWARD_IMG    = os.path.join(logger.root, SHOW_CONFIG["reward_img"])
 
 def test(env_name : str, agent : DQN):
     env = gym.make(env_name, new_step_api=True, render_mode="human")
@@ -36,7 +42,7 @@ def test(env_name : str, agent : DQN):
         next_state, reward, _, done, _ = env.step(action)
         state = next_state
         test_reward += reward
-    print(f"[INFO] Test reward:{test_reward}")
+    logger.info(f"Test reward:{test_reward}")
     env.close()
     return
 
@@ -45,7 +51,7 @@ def train(env_name : str, replay_buffer : ReplayBuffer, agent : DQN, epochs : in
     epoch_list   = []
     reward_list = []
     
-    for epoch in tqdm(range(epochs)):
+    for epoch in tqdm(range(1, epochs + 1)):
         episode_reward = 0
         state = env.reset()
         done = False
@@ -67,11 +73,13 @@ def train(env_name : str, replay_buffer : ReplayBuffer, agent : DQN, epochs : in
                 agent.update(transition_dict)
         
         if epoch % 50 == 0:
-            print(f"[INFO] Epoch:{epoch} Rewards:{episode_reward}")
+            logger.save_model(agent.q_net, f"_{epoch}.pth")
+            logger.info(f"Epoch:{epoch} Rewards:{episode_reward}")
+            logger.info(f"Save model in _{epoch}.pth")
         epoch_list.append(epoch)
         reward_list.append(episode_reward)
 
-    print("[INFO] Finished training!")
+    logger.info("Finished training!")
     env.close()
     return epoch_list, reward_list
 
@@ -79,7 +87,7 @@ def draw(epoch_list, reward_list):
     plt.plot(epoch_list, reward_list, label="Reward")
     plt.title("Reward Img")
     plt.legend()
-    # plt.savefig(REWARD_IMG)
+    plt.savefig(REWARD_IMG)
     plt.show()
     plt.close()
     return
