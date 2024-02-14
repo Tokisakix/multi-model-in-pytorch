@@ -13,7 +13,7 @@
     "agent":{
         "lr": 1e-3,
         "gamma": 0.98,
-        "epsilon": 0.05,
+        "epsilon": 0.10,
         "target_update": 10
     },
     "train":{

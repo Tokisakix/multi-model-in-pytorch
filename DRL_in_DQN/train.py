@@ -32,7 +32,7 @@ def test(env_name : str, agent : DQN):
     done = False
     while not done:
         env.render()
-        action = agent.take_action(state)
+        action = agent.take_action(state, train=False)
         next_state, reward, _, done, _ = env.step(action)
         state = next_state
         test_reward += reward

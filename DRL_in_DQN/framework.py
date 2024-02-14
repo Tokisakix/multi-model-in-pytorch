@@ -18,8 +18,8 @@ class DQN:
         self.count = 0
         return
 
-    def take_action(self, state):
-        if np.random.random() < self.epsilon:
+    def take_action(self, state, train=True):
+        if np.random.random() < self.epsilon and train:
             action = np.random.randint(self.action_dim)
         else:
             state = torch.tensor([state], dtype=torch.float).to(self.device)
