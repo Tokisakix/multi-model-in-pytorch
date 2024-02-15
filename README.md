@@ -13,4 +13,5 @@ Provides basic Pytorch implementations of common AI models in common application
 5. [Node Classify in GCN](node_classify_in_GCN/README.md)
 6. [Node Classify in GAT](node_classify_in_GAT/README.md)
 7. [Deep Reinforcement Learning in DQN](DRL_in_DQN/README.md)
-8. [Deep Reinforcement Learning in REINFORCE](DRL_in_REINFORCE/README.md)
+8. [Deep Reinforcement Learning in DDQN](DRL_in_DDQN/README.md)
+9. [Deep Reinforcement Learning in REINFORCE](DRL_in_REINFORCE/README.md)

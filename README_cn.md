@@ -13,4 +13,5 @@
 5. [节点分类-GCN 实现](node_classify_in_GCN/README_cn.md)
 6. [节点分类-GAT 实现](node_classify_in_GAT/README_cn.md)
 7. [深度强化学习-DQN 实现](DRL_in_DQN/README_cn.md)
-8. [深度强化学习-REINFORCE 实现](DRL_in_REINFORCE/README_cn.md)
+8. [深度强化学习-DDQN 实现](DRL_in_DDQN/README_cn.md)
+9. [深度强化学习-REINFORCE 实现](DRL_in_REINFORCE/README_cn.md)
