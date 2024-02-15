@@ -15,4 +15,5 @@ Provides basic Pytorch implementations of common AI models in common application
 7. [Deep Reinforcement Learning in DQN](DRL_in_DQN/README.md)
 8. [Deep Reinforcement Learning in DDQN](DRL_in_DDQN/README.md)
 9. [Deep Reinforcement Learning in DuelingDQN](DRL_in_DuelingDQN/README.md)
-10. [Deep Reinforcement Learning in REINFORCE](DRL_in_REINFORCE/README.md)
+10. [Deep Reinforcement Learning in AverageDQN](DRL_in_AverageDQN/README.md)
+11. [Deep Reinforcement Learning in REINFORCE](DRL_in_REINFORCE/README.md)
