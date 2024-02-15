@@ -1,6 +1,6 @@
-# Text Classify in LSTM
+# Deep Reinforcement Learning in DQN
 
-[中文](README_cn.md) | 英文
+[Chinese](README_cn.md) | English
 
 Using DQN algorithm, deep reinforcement learning is realized
 
@@ -11,16 +11,17 @@ Using DQN algorithm, deep reinforcement learning is realized
 
 ```
 torch
-torchtext
+numpy
 matplotlib
+gym
 tqdm
 ```
 
 # How to run
 
 ```
-cd ~/image_classify
-python run.py
+cd ~/DRL_in_DQN
+python train.py
 ```
 
 The sample code then automatically builds an interactive environment based on the global Settings and starts training, with default logs saved in the <code>log/</code> directory
