@@ -1,0 +1,23 @@
+{
+    "cuda": true,
+    "env" : "CartPole-v1",
+    "log":{
+        "root": "log/",
+        "save_num": 4
+    },
+    "buffer":{
+        "buffer_size": 10000,
+        "minimal_size": 500,
+        "batch_size": 64
+    },
+    "agent":{
+        "lr": 1e-3,
+        "gamma": 0.98
+    },
+    "train":{
+        "epochs": 500
+    },
+    "show":{
+        "reward_img": "reward_img.jpg"
+    }
+}
