@@ -22,7 +22,7 @@ tqdm
 # 如何运行
 
 ```
-cd ~/image_classify
+cd ~/image_classify_in_ViT
 python run.py
 ```
 

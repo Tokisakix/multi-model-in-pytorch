@@ -1,6 +1,6 @@
 # Image Classify in CNN
 
-[中文](README_cn.md) | 英文
+[Chinese](README_cn.md) | English
 
 A simple Vision Transformer model, is used to classify images
 
@@ -22,7 +22,7 @@ tqdm
 # How to run
 
 ```
-cd ~/image_classify
+cd ~/image_classify_in_ViT
 python run.py
 ```
 

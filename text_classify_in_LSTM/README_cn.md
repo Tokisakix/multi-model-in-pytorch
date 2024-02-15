@@ -18,7 +18,7 @@ tqdm
 # 如何运行
 
 ```
-cd ~/image_classify
+cd ~/text_classify_in_LSTM
 python run.py
 ```
 

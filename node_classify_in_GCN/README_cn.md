@@ -22,7 +22,7 @@ tqdm
 # 如何运行
 
 ```
-cd ~/image_classify
+cd ~/node_classify_in_GCN
 python run.py
 ```
 

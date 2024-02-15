@@ -1,6 +1,6 @@
 # Text Classify in LSTM
 
-[中文](README_cn.md) | 英文
+[Chinese](README_cn.md) | English
 
 A simple LSTM model, is used to classify text
 
@@ -18,7 +18,7 @@ tqdm
 # How to run
 
 ```
-cd ~/image_classify
+cd ~/text_classify_in_LSTM
 python run.py
 ```
 

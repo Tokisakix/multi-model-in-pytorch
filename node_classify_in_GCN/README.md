@@ -1,6 +1,6 @@
 # Node Classify in GCN
 
-[中文](README_cn.md) | 英文
+[Chinese](README_cn.md) | English
 
 A simple GCN model, is used to classify node
 
@@ -22,7 +22,7 @@ tqdm
 # How to run
 
 ```
-cd ~/image_classify
+cd ~/node_classify_in_GCN
 python run.py
 ```
 

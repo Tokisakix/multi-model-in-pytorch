@@ -1,6 +1,6 @@
 # Node Classify in GAT
 
-[中文](README_cn.md) | 英文
+[Chinese](README_cn.md) | English
 
 A simple GAT model, is used to classify node
 
@@ -22,7 +22,7 @@ tqdm
 # How to run
 
 ```
-cd ~/image_classify
+cd ~/node_classify_in_GAT
 python run.py
 ```
 
