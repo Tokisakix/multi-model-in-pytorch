@@ -22,8 +22,10 @@ class DDQN:
         if np.random.random() < self.epsilon and train:
             action = np.random.randint(self.action_dim)
         else:
-            state = torch.tensor([state], dtype=torch.float).to(self.device)
-            action = self.q_net(state).argmax().item()
+            state  = torch.tensor([state], dtype=torch.float).to(self.device)
+            prob   = self.q_net(state, train)
+            value  = F.linear(prob, torch.arange(self.q_net.num_atoms, dtype=torch.float).reshape(-1, 10).to(self.device)).squeeze(-1)
+            action = value.argmax().item()
         return action
 
     def update(self, transition_dict):
@@ -33,11 +35,15 @@ class DDQN:
         next_states = torch.tensor(transition_dict['next_states'], dtype=torch.float).to(self.device)
         dones = torch.tensor(transition_dict['dones'], dtype=torch.float).view(-1, 1).to(self.device)
 
-        q_values = self.q_net(states).gather(1, actions)
-        next_actions = self.target_q_net(next_states).max(1)[1].unsqueeze(-1)
-        max_next_q_values = self.target_q_net(next_states).gather(1, next_actions)
+        probs    = self.q_net(states)
+        q_values = F.linear(probs, torch.arange(self.q_net.num_atoms, dtype=torch.float).reshape(-1, 10).to(self.device)).squeeze(-1).gather(1, actions)
+        next_probs   = self.target_q_net(next_states)
+        next_value   = F.linear(next_probs, torch.arange(self.target_q_net.num_atoms, dtype=torch.float).reshape(-1, 10).to(self.device)).squeeze(-1)
+        next_actions = next_value.max(1)[1].unsqueeze(-1)
+        max_next_q_values = next_value.gather(1, next_actions)
         q_targets = rewards + self.gamma * max_next_q_values * (1 - dones)
-        dqn_loss = torch.mean(F.mse_loss(q_values, q_targets))
+        q_targets = q_targets.long()
+        dqn_loss = torch.mean(torch.nn.CrossEntropyLoss()(probs.mean(dim=1), q_targets.squeeze(-1)))
         self.optimizer.zero_grad()
         dqn_loss.backward()
         self.optimizer.step()
@@ -46,7 +52,10 @@ class DDQN:
             self.target_q_net.load_state_dict(
                 self.q_net.state_dict())
         self.count += 1
-        return dqn_loss.cpu().item()
+
+        td_error = (q_values - q_targets).abs().cpu().detach().squeeze(-1).numpy()
+
+        return td_error
     
 
 

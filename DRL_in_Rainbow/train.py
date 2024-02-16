@@ -1,10 +1,11 @@
 import os
 import gym
+import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 from load_config import load_config
-from ReplayBuffer import ReplayBuffer
+from ReplayBuffer import PrioritizedReplayBuffer
 from model import Model
 from framework import DDQN
 from logger import Logger
@@ -28,6 +29,7 @@ LEARNING_RATE = AGENT_CONFIG["lr"]
 GAMMA         = AGENT_CONFIG["gamma"]
 EPSILON       = AGENT_CONFIG["epsilon"]
 TARGET_UPDATE = AGENT_CONFIG["target_update"]
+N_STEP        = TRAIN_CONFIG["n_step"]
 EPOCHS        = TRAIN_CONFIG["epochs"]
 REWARD_IMG    = os.path.join(logger.root, SHOW_CONFIG["reward_img"])
 
@@ -46,31 +48,38 @@ def test(env_name : str, agent : DDQN):
     env.close()
     return
 
-def train(env_name : str, replay_buffer : ReplayBuffer, agent : DDQN, epochs : int):
+def train(env_name : str, replay_buffer : PrioritizedReplayBuffer, agent : DDQN, n_step : int, epochs : int):
     env = gym.make(env_name, new_step_api=True)
     epoch_list   = []
-    reward_list = []
+    reward_list  = []
     
     for epoch in tqdm(range(1, epochs + 1)):
-        episode_reward = 0
+        episode_reward     = 0
+        n_step_reward_list = []
         state = env.reset()
         done = False
         while not done:
             action = agent.take_action(state)
             next_state, reward, _, done, _ = env.step(action)
-            replay_buffer.add(state, action, reward, next_state, done)
+            n_step_reward_list.append(reward)
+            if len(n_step_reward_list) > n_step:
+                del n_step_reward_list[0]
+            n_step_reward = np.mean(n_step_reward_list)
+
+            replay_buffer.add(state, action, n_step_reward, next_state, done)
             state = next_state
             episode_reward += reward
             if replay_buffer.can_sample():
-                b_s, b_a, b_r, b_ns, b_d = replay_buffer.sample()
+                b_s, b_a, b_r, b_ns, b_d, b_idx = replay_buffer.sample()
                 transition_dict = {
                     'states': b_s,
                     'actions': b_a,
                     'next_states': b_ns,
                     'rewards': b_r,
-                    'dones': b_d
+                    'dones': b_d,
                 }
-                agent.update(transition_dict)
+                b_td = agent.update(transition_dict)
+                replay_buffer.update_priorities(b_idx, b_td)
         
         if epoch % 50 == 0:
             logger.save_model(agent.q_net, f"_{epoch}.pth")
@@ -104,10 +113,10 @@ if __name__ == "__main__":
 
     q_net         = Model(state_dim, 64, action_dim)
     target_q_net  = Model(state_dim, 64, action_dim)
-    buffer        = ReplayBuffer(BUFFER_SIZE, BATCH_SIZE, MINIMAL_SIZE)
+    buffer        = PrioritizedReplayBuffer(BUFFER_SIZE, BATCH_SIZE, MINIMAL_SIZE)
     agent         = DDQN(q_net, target_q_net, 2, LEARNING_RATE, GAMMA, EPSILON, TARGET_UPDATE, CUDA)
 
-    epoch_list, reward_list = train(ENV_NAME, buffer, agent, EPOCHS)
+    epoch_list, reward_list = train(ENV_NAME, buffer, agent, N_STEP, EPOCHS)
     draw(epoch_list, reward_list)
 
     test(ENV_NAME, agent)

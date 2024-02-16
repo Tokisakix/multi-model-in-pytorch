@@ -1,5 +1,5 @@
 {
-    "cuda": true,
+    "cuda": false,
     "env" : "CartPole-v1",
     "log":{
         "root": "log/",
@@ -8,7 +8,7 @@
     "buffer":{
         "buffer_size": 10000,
         "minimal_size": 500,
-        "batch_size": 64
+        "batch_size": 4
     },
     "agent":{
         "lr": 1e-3,
@@ -17,6 +17,7 @@
         "target_update": 10
     },
     "train":{
+        "n_step": 4,
         "epochs": 500
     },
     "show":{
