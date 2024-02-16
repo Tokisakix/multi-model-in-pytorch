@@ -16,4 +16,5 @@
 8. [深度强化学习-DDQN 实现](DRL_in_DDQN/README_cn.md)
 9. [深度强化学习-DuelingDQN 实现](DRL_in_DuelingDQN/README_cn.md)
 10. [深度强化学习-AverageDQN 实现](DRL_in_AverageDQN/README_cn.md)
+10. [深度强化学习-Rainbow 实现](DRL_in_Rainbow/README_cn.md)
 11. [深度强化学习-REINFORCE 实现](DRL_in_REINFORCE/README_cn.md)
