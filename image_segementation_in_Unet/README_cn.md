@@ -1,14 +1,11 @@
-# 图片分类-CNN
+# 图片分割-Unet
 
 中文 | [英文](README.md)
 
-使用简易的卷积神经网络，对图片做分类
+使用简易的 Unet，对图片做分割
 
-![img](asset/CNN.png)
-
-<center class = "half">
-<img src = "asset/loss_img.jpg"  width = "50%" align = left><img src = "asset/acc_img.jpg"  width = "50%" align = right>
-</center>
+![img](asset/Unet.png)
+![img](asset/loss_img.jpg)
 
 # 环境依赖
 
@@ -22,8 +19,9 @@ tqdm
 # 如何运行
 
 ```
-cd ~/image_classify_in_CNN
+cd ~/image_segementation_in_Unet
 python train.py
+python webui.py
 ```
 
 然后示例代码会根据全局设置自动下载数据集并开始训练，默认下数据集下载于 <code>data/</code> 目录，日志保存在 <code>log/</code> 目录

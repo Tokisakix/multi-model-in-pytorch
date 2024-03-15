@@ -1,6 +1,6 @@
 import torchvision
-from torchvision import datasets
 from torch.utils.data import Dataset
+import cv2 as cv
 
 from load_config import load_config
 
@@ -8,9 +8,15 @@ class DataSet(Dataset):
     def __init__(self, root, download, mod):
         super().__init__()
         self.dataset = []
+        self.transforms = torchvision.transforms.Compose([
+            torchvision.transforms.ToTensor(),
+        ])
         for idx in range(30):
-            image = torchvision.io.read_image(f"data/train/image/{idx}.png")
-            label = torchvision.io.read_image(f"data/train/label/{idx}.png")
+            image = cv.imread(f"data/train/image/{idx}.png")
+            image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
+            label = cv.imread(f"data/train/label/{idx}.png", cv.IMREAD_GRAYSCALE)
+            image = self.transforms(image)
+            label = self.transforms(label)
             self.dataset.append((image, label))
         return
     

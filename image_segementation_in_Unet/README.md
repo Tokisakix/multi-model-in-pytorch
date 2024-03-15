@@ -5,10 +5,7 @@
 A simple Unet neural network is used to segement images
 
 ![img](asset/Unet.png)
-
-<center class = "half">
-<img src = "asset/loss_img.jpg"  width = "50%" align = left><img src = "asset/acc_img.jpg"  width = "50%" align = right>
-</center>
+![img](asset/loss_img.jpg)
 
 # Requirement
 
